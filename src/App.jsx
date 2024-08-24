@@ -1,9 +1,5 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
 import "./App.css";
-import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
-import { AppBar, Toolbar, Typography, Button, IconButton } from "@mui/material";
-import MenuIcon from "@mui/icons-material/Menu";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 // --------
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -12,6 +8,7 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 function App() {
+
   return (
     <>
       <Router>

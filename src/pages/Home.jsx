@@ -1,15 +1,15 @@
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Button,
   CircularProgress,
-  Divider,
-  ListItemIcon,
   TextField,
 } from "@mui/material";
 import axios from "axios";
+import { getDogs } from "../axios/actions";
 
 const Home = () => {
   const [dogImage, setDogImage] = useState("");
+  const [dogsList, setDogsList] = useState([]);
 
   const fetchDogImage = async (props) => {
     try {
@@ -24,12 +24,14 @@ const Home = () => {
 
   const listOfAllDogs = async () => {
     try {
-      const response = await axios.get(`https://dog.ceo/api/breeds/list/all`);
-      console.log(response.data.message);
+      const response = await getDogs();
+      setDogsList(response?.data?.message);
     } catch (error) {
       console.error("Error fetching dog data:", error);
     }
   };
+
+  console.log('dogsList', dogsList);
 
   const [inputValue, setInputValue] = useState("");
 
@@ -44,11 +46,10 @@ const Home = () => {
   const bufferHandler = () => {
     handleButtonClick();
     fetchDogImage(inputValue);
-    listOfAllDogs();
   };
 
-  React.useEffect(() => {
-    fetchDogImage();
+  useEffect(() => {
+    listOfAllDogs();
   }, []);
 
   return (
